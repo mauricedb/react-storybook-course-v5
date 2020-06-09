@@ -3,11 +3,9 @@ import { Formik, Form } from "formik";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import FormikTextField from "./FormikTextField";
+import SaveCancelButtons from "./SaveCancelButtons";
 
 import "./MovieDetails.css";
 
@@ -33,6 +31,10 @@ function MovieDetails({ movie, loading, error }) {
     >
       {({ isSubmitting }) => (
         <Form noValidate autoComplete="off" className="movie-details-form">
+          <Typography gutterBottom variant="h5" component="h2">
+            Movie details
+          </Typography>
+
           <FormikTextField label="Title" name="title" />
           <FormikTextField label="Overview" name="overview" multiline />
           <FormikTextField
@@ -40,12 +42,7 @@ function MovieDetails({ movie, loading, error }) {
             name="vote_average"
             type="number"
           />
-          <ButtonGroup color="primary" disabled={isSubmitting}>
-            <Button type="submit" className="submit-button">
-              {isSubmitting ? <CircularProgress size="1em" /> : "Save"}
-            </Button>
-            <Button>Cancel</Button>
-          </ButtonGroup>
+          <SaveCancelButtons isSubmitting={isSubmitting} />
         </Form>
       )}
     </Formik>

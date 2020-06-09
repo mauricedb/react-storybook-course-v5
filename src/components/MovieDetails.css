@@ -23,7 +23,3 @@
 .movie-details-form > .MuiTextField-root > label {
   border: none;
 }
-
-.movie-details-form .submit-button {
-  width: 4rem;
-}
