@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 import FormikTextField from "./FormikTextField";
 import SaveCancelButtons from "./SaveCancelButtons";
@@ -13,6 +15,7 @@ import "./MovieDetails.css";
 
 function MovieDetails({ movie, loading, error, saveMovie }) {
   const history = useHistory();
+  const [message, setMessage] = React.useState(null);
 
   if (loading) {
     return <LinearProgress />;
@@ -30,13 +33,12 @@ function MovieDetails({ movie, loading, error, saveMovie }) {
     <Formik
       initialValues={movie}
       validationSchema={movieSchema}
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values) => {
         try {
           await saveMovie(values);
           history.push("/movies");
         } catch (error) {
-          alert(error.message);
-          actions.setSubmitting(false);
+          setMessage(error.message);
         }
       }}
     >
@@ -53,6 +55,23 @@ function MovieDetails({ movie, loading, error, saveMovie }) {
             name="vote_average"
             type="number"
           />
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={!!message}
+            autoHideDuration={6000}
+            onClose={(_, reason) => {
+              if (reason !== "clickaway") {
+                setMessage(null);
+              }
+            }}
+          >
+            <Alert elevation={6} variant="filled" severity="error">
+              {message}
+            </Alert>
+          </Snackbar>
           <SaveCancelButtons
             isValid={isValid}
             isSubmitting={isSubmitting}
