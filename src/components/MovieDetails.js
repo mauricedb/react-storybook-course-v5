@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
+import { useHistory } from "react-router-dom";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +10,9 @@ import SaveCancelButtons from "./SaveCancelButtons";
 
 import "./MovieDetails.css";
 
-function MovieDetails({ movie, loading, error }) {
+function MovieDetails({ movie, loading, error, saveMovie }) {
+  const history = useHistory();
+
   if (loading) {
     return <LinearProgress />;
   }
@@ -25,8 +28,17 @@ function MovieDetails({ movie, loading, error }) {
   return (
     <Formik
       initialValues={movie}
-      onSubmit={async () => {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+      onSubmit={async (values, actions) => {
+        console.log(values);
+        // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        try {
+          await saveMovie(values);
+          history.push("/movies");
+        } catch (error) {
+          alert(error.message);
+          actions.setSubmitting(false);
+        }
       }}
     >
       {({ isSubmitting }) => (
@@ -42,7 +54,10 @@ function MovieDetails({ movie, loading, error }) {
             name="vote_average"
             type="number"
           />
-          <SaveCancelButtons isSubmitting={isSubmitting} />
+          <SaveCancelButtons
+            isSubmitting={isSubmitting}
+            onCancel={() => history.push("/movies")}
+          />
         </Form>
       )}
     </Formik>
