@@ -6,14 +6,14 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./SaveCancelButtons.css";
 
-function SaveCancelButtons({ isSubmitting, onCancel }) {
+function SaveCancelButtons({ isValid, isSubmitting, onCancel }) {
   return (
     <ButtonGroup
       color="primary"
       className="save-cancel-buttons"
       disabled={isSubmitting}
     >
-      <Button type="submit">
+      <Button type="submit" disabled={!isValid}>
         {isSubmitting ? <CircularProgress size="1em" /> : "Save"}
       </Button>
       <Button onClick={onCancel}>Cancel</Button>

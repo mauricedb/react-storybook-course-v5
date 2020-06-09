@@ -23,3 +23,7 @@
 .movie-details-form > .MuiTextField-root > label {
   border: none;
 }
+
+.movie-details-form > .MuiTextField-root > .MuiFormHelperText-root {
+  border: none;
+}

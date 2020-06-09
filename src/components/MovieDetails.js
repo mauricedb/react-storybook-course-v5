@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 import FormikTextField from "./FormikTextField";
 import SaveCancelButtons from "./SaveCancelButtons";
+import movieSchema from "./movieSchema";
 
 import "./MovieDetails.css";
 
@@ -28,10 +29,8 @@ function MovieDetails({ movie, loading, error, saveMovie }) {
   return (
     <Formik
       initialValues={movie}
+      validationSchema={movieSchema}
       onSubmit={async (values, actions) => {
-        console.log(values);
-        // await new Promise((resolve) => setTimeout(resolve, 5000));
-
         try {
           await saveMovie(values);
           history.push("/movies");
@@ -41,7 +40,7 @@ function MovieDetails({ movie, loading, error, saveMovie }) {
         }
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, isValid, values, errors, touched }) => (
         <Form noValidate autoComplete="off" className="movie-details-form">
           <Typography gutterBottom variant="h5" component="h2">
             Movie details
@@ -55,6 +54,7 @@ function MovieDetails({ movie, loading, error, saveMovie }) {
             type="number"
           />
           <SaveCancelButtons
+            isValid={isValid}
             isSubmitting={isSubmitting}
             onCancel={() => history.push("/movies")}
           />
