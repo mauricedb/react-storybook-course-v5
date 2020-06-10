@@ -1,11 +1,10 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
 
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
 import "./MovieListItem.css";
@@ -27,9 +26,13 @@ function MovieListItem({ id, title, backdrop_path, overview, onLearnMore }) {
         <Typography component="p">{overview}</Typography>
       </CardContent>
       <CardActions>
-        <Link component={RouterLink} to={`/movie/${id}/${title}`}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => onLearnMore(id, title)}
+        >
           Learn More
-        </Link>
+        </Button>
       </CardActions>
     </Card>
   );
