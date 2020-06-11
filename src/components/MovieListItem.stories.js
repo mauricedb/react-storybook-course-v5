@@ -8,7 +8,7 @@ export default {
   component: MovieListItem,
 };
 
-const movie = {
+const movieTheGodfather = {
   id: 238,
   title: "The Godfather",
   backdrop_path: "/ejdD20cdHNFAYAN2DlqPToXKyzx.jpg",
@@ -17,16 +17,37 @@ const movie = {
   vote_average: 8.7,
 };
 
-export const Default = () => {
-  return <MovieListItem {...movie} onLearnMore={action("Learn more")} />;
+const movie12AngryMen = {
+  id: 389,
+  title: "12 Angry Men",
+  backdrop_path: "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
+  overview:
+    "The defense and the prosecution have rested and the jury is filing into the jury room to decide if a young Spanish-American is guilty or innocent of murdering his father. What begins as an open and shut case soon becomes a mini-drama of each of the jurors' prejudices and preconceptions about the trial, the accused, and each other.",
+  vote_average: 8.4,
+};
+
+export const TheGodfather = () => {
+  return (
+    <MovieListItem {...movieTheGodfather} onLearnMore={action("Learn more")} />
+  );
 };
 
 export const NoImage = () => {
   return (
     <MovieListItem
-      {...movie}
+      {...movieTheGodfather}
       backdrop_path=""
       onLearnMore={action("Learn more")}
     />
   );
+};
+
+export const AngryMen = () => {
+  return (
+    <MovieListItem {...movie12AngryMen} onLearnMore={action("Learn more")} />
+  );
+};
+
+AngryMen.story = {
+  name: "12 Angry Men",
 };
