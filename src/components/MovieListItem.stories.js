@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import MovieListItem from "./MovieListItem";
 
 export default {
-  title: "MovieListItem",
+  title: "Molecules/MovieListItem",
   component: MovieListItem,
 };
 
