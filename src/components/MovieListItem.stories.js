@@ -1,11 +1,18 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
+import { withKnobs, object, text } from "@storybook/addon-knobs";
 
 import MovieListItem from "./MovieListItem";
 
 export default {
   title: "Molecules/MovieListItem",
   component: MovieListItem,
+  decorators: [withKnobs],
+  parameters: {
+    knobs: {
+      escapeHTML: false,
+    },
+  },
 };
 
 const movieTheGodfather = {
@@ -27,9 +34,13 @@ const movie12AngryMen = {
 };
 
 export const TheGodfather = () => {
-  return (
-    <MovieListItem {...movieTheGodfather} onLearnMore={action("Learn more")} />
-  );
+  const movie = {
+    ...movieTheGodfather,
+    title: text("Title", movieTheGodfather.title),
+    overview: text("Overview", movieTheGodfather.overview),
+  };
+
+  return <MovieListItem {...movie} onLearnMore={action("Learn more")} />;
 };
 
 export const NoImage = () => {
@@ -44,10 +55,14 @@ export const NoImage = () => {
 
 export const AngryMen = () => {
   return (
-    <MovieListItem {...movie12AngryMen} onLearnMore={action("Learn more")} />
+    <MovieListItem
+      {...object("Movie", movie12AngryMen)}
+      onLearnMore={action("Learn more")}
+    />
   );
 };
 
 AngryMen.story = {
   name: "12 Angry Men",
+  // decorators: [withKnobs],
 };
