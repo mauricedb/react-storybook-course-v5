@@ -13,9 +13,12 @@ export default {
       escapeHTML: false,
     },
   },
+  // excludeStories: ["movieTheGodfather", "movie12AngryMen"],
+  excludeStories: /^movie/,
+  // includeStories: ["TheGodfather"],
 };
 
-const movieTheGodfather = {
+export const movieTheGodfather = {
   id: 238,
   title: "The Godfather",
   backdrop_path: "/ejdD20cdHNFAYAN2DlqPToXKyzx.jpg",
@@ -24,7 +27,7 @@ const movieTheGodfather = {
   vote_average: 8.7,
 };
 
-const movie12AngryMen = {
+export const movie12AngryMen = {
   id: 389,
   title: "12 Angry Men",
   backdrop_path: "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
